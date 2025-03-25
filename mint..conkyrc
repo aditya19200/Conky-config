@@ -1,0 +1,85 @@
+-- Advanced Graphical Conky Configuration
+-- Designed for modern Linux systems with a sleek, technical aesthetic
+
+conky.config = {
+    -- Core Conky Settings
+    alignment = 'top_right',
+    background = true,
+    border_width = 1,
+    cpu_avg_samples = 4,
+    default_color = 'white',
+    default_outline_color = 'grey',
+    default_shade_color = 'black',
+    double_buffer = true,
+    draw_borders = false,
+    draw_graph_borders = false,
+    draw_shades = false,
+    extra_newline = false,
+    
+    -- Font and Appearance
+    font = 'JetBrains Mono:size=10',
+    gap_x = 30,
+    gap_y = 30,
+    minimum_height = 600,
+    minimum_width = 300,
+    
+    -- Performance and Update Settings
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_ncurses = false,
+    out_to_stderr = false,
+    out_to_x = true,
+    
+    -- Window Properties
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    
+    -- Additional Settings
+    show_graph_range = false,
+    show_graph_scale = false,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'none',
+    use_xft = true,
+    
+    -- Color Palette
+    color1 = '#121212',   -- Background
+    color2 = '#2C3E50',   -- Dark Blue-Gray
+    color3 = '#3498DB',   -- Bright Blue
+    color4 = '#2980B9',   -- Dark Blue
+    color5 = '#7F8C8D',   -- Gray
+};
+
+conky.text = [[
+${font JetBrains Mono:bold:size=14}${color3}SYSTEM PERFORMANCE${hr 2}${font}
+
+${font JetBrains Mono:bold:size=12}${color3}CPU UTILIZATION${font}
+${cpugraph cpu0 40,300 2980B9 3498DB}
+Total: ${cpu}% | Temp: ${hwmon 1 temp 1}°C
+${cpubar cpu1 10,145} ${cpubar cpu2 10,145}
+${cpubar cpu3 10,145} ${cpubar cpu4 10,145}
+
+${font JetBrains Mono:bold:size=12}${color3}MEMORY ANALYSIS${font}
+RAM: ${mem} / ${memmax} ${membar 10}
+Swap: ${swap} / ${swapmax} ${swapbar 10}
+
+${font JetBrains Mono:bold:size=12}${color3}NETWORK DYNAMICS${font}
+IP: ${addr wlan0}
+${font JetBrains Mono:size=10}Upload:   ${upspeed wlan0}${alignr}${upspeedgraph wlan0 20,100 2980B9 3498DB}
+Download: ${downspeed wlan0}${alignr}${downspeedgraph wlan0 20,100 2980B9 3498DB}
+
+${font JetBrains Mono:bold:size=12}${color3}DISK PERFORMANCE${font}
+Root: ${fs_used /} / ${fs_size /} ${fs_bar 10 /}
+Home: ${fs_used /home} / ${fs_size /home} ${fs_bar 10 /home}
+I/O Read: ${diskio_read}${alignr}I/O Write: ${diskio_write}
+
+${font JetBrains Mono:bold:size=12}${color3}TOP PROCESSES${font}
+${color5}NAME${alignr}CPU%${alignr}MEM%
+${top name 1}${alignr}${top cpu 1}%${alignr}${top mem 1}%
+${top name 2}${alignr}${top cpu 2}%${alignr}${top mem 2}%
+${top name 3}${alignr}${top cpu 3}%${alignr}${top mem 3}%
+]];
